@@ -1,0 +1,179 @@
+<page language="java" contentType="text/html; charset=UTF-8"
+      pageEncoding="UTF-8"%></page>
+<taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %></taglib>
+<taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %></taglib>
+
+
+<html xmlns xmlns:th="http://www.w3.org/1999/xhtml" : th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>게시판</title>
+  <script srt="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <p>글번호 : [[${halo.boardId}]]</p>
+  <p id="title">제목 : [[${halo.title}]]</p>
+  <p>작성자 : [[${halo.name}]]</p>
+  내용 :
+  <div id="content">
+<textarea readonly="readonly"
+          class="form-control"
+          th:text="${halo.content}">
+</textarea>
+  </div>
+
+  <form th:action="@{update}" method="get">
+    <input type="hidden" name="boardId" th:value="${halo.boardId}">
+    <button type="submit">수정</button>
+  </form>
+
+  <form th:action="@{delete}" method="get">
+    <input type="hidden" name="boardId" th:value="${halo.boardId}">
+    <button type="submit">삭제</button>
+  </form>
+
+  <!-- 홈버튼 시작 -->
+
+  <form th:action="@{main}" method="get">
+    <button type="submit">홈</button>
+  </form>
+
+  <!-- 홈버튼 끝 -->
+
+  <hr />
+  <table class="table table-hover" th:each="replyList :${replyList}">
+    <thead>
+    <th>댓글번호</th>
+    <th>작성자</th>
+    <th>내용</th>
+    <th>날짜</th>
+    </thead>
+    <tr>
+      <td>[[${replyList.rno}]]</td>
+      <td>[[${replyList.writer}]]</td>
+      <td>
+        <div>
+          <p>[[${replyList.content}]]</p>
+        </div>
+
+        <form th:action="@{updateReply}" method="post">
+          <textarea class="form-control" name="content"
+                    id="contentToUpdate" style="display:none"
+                    rows="5" cols="10">[[${replyList.content}]]</textarea>
+          <input type="hidden" name="boardId" th:value="${halo.boardId}">
+          <input type="hidden" name="rno" th:value="${replyList.rno}">
+          <input type="hidden" name="writer" th:value="${replyList.writer}">
+          <!--댓글 수정 버튼 -->
+          <button type="button" class="updateReplyBtn">수정</button>
+          <button type="submit" class="saveUpdateReply" style="display:none">저장</button>
+          <button type="button" class="cancelUpdateReply" style="display:none">취소</button>
+        </form>
+
+        <!-- 댓글 삭제 버튼 -->
+        <form th:action="@{deleteReply}" method="get">
+          <input type="hidden" name="boardId" th:value="${halo.boardId}">
+          <input type="hidden" name="rno" th:value="${replyList.rno}">
+          <button type="submit">삭제</button>
+        </form>
+      </td>
+      <td>[[${replyList.regdate}]]</td>
+    </tr>
+    <tr>
+      <!-- 대댓글 작성 폼 -->
+      <td colspan="4">
+        <form th:action="@{uploadReplyReply}" method="post">
+          <input type="hidden" name="boardId" th:value="${halo.boardId}">
+          <!-- 댓글의 rno -->
+          <input type="hidden" name="parentId" th:value="${replyList.rno}">
+
+          <label>대댓글 작성자</label>
+          <input type="text" class="form-control" name="writer">
+          <textarea class="form-control" name="content"
+                    rows="5" cols="50">
+              </textarea>
+          <button type="submit">대댓글 작성</button>
+        </form>
+      </td>
+    </tr>
+    <!-- 대댓글 -->
+    <tr th:each="replyReplyList :${replyReplyList}"
+        th:if="${replyReplyList.parentId}==${replyList.rno}">
+      <td>[[${replyReplyList.rno}]]</td>
+      <td>[[${replyReplyList.writer}]]</td>
+      <td>
+        <!-- 수정전 댓글내용 -->
+        <div>
+          <p>[[${replyReplyList.content}]]</p>
+        </div>
+        <!-- 수정할 댓글내용 -->
+        <form th:action="@{updateReplyReply}" method="post">
+              <textarea class="form-control" name="content"
+                        id="contentToUpdate" style="display:none"
+                        rows="5" cols="10">[[${replyReplyList.content}]]</textarea>
+          <input type="hidden" name="boardId" th:value="${halo.boardId}">
+          <input type="hidden" name="rno" th:value="${replyReplyList.rno}">
+          <input type="hidden" name="parentId" th:value="${replyReplyList.parentId}">
+          <input type="hidden" name="writer" th:value="${replyReplyList.writer}">
+
+          <button type="button" class="updateReplyBtn">수정</button>
+          <button type="submit" id="saveUpdateReply" style="display:none">저장</button>
+          <button type="button" class="cancelUpdateReply" style="display:none">취소</button>
+        </form>
+
+        <!-- 댓글 삭제 버튼 -->
+        <form th:action="@{deleteReplyReply}" method="get">
+          <input type="hidden" name="boardId" th:value="${halo.boardId}">
+          <input type="hidden" name="rno" th:value="${replyReplyList.rno}">
+          <button type="submit">삭제</button>
+        </form>
+      </td>
+      <td>[[${replyReplyList.regdate}]]</td>
+    </tr>
+  </table>
+
+  <div>
+    <form th:action="@{view}" method="post">
+      <input type="hidden" name="boardId" th:value="${halo.boardId}">
+      <label>댓글 작성자</label>
+      <input type="text" class="form-control" name="writer">
+      <textarea class="form-control" name="content"
+                rows="5" cols="50"></textarea>
+      <button type="submit">댓글 작성</button>
+    </form>
+  </div>
+</div>
+</body>
+<script>
+    const updateReplyBtn = document.getElementsByClassName('updateReplyBtn');
+    const a = (e) => {
+
+      $(e.target.parentNode.parentNode.children[0]).hide();
+      $(e.target.parentNode.children[0]).show();
+      $(e.target.parentNode.children[5]).show();
+      $(e.target.parentNode.children[6]).show();
+      $(e.target).hide();
+      $(e.target.parentNode.parentNode.children[2]).hide();
+
+    }
+    for(i=0;i<$(updateReplyBtn).length;i++){
+      updateReplyBtn[i].addEventListener('click', a);
+    }
+
+
+    const cancelUpdateReply = document.getElementsByClassName('cancelUpdateReply');
+    const b = (e) => {
+
+      $(e.target.parentNode.parentNode.children[0]).show();
+      $(e.target.parentNode.children[0]).hide();
+      $(e.target.parentNode.children[5]).hide();
+      $(e.target).hide();
+      $(e.target.parentNode.children[4]).show();
+      $(e.target.parentNode.parentNode.children[2]).show();
+    }
+    for(i=0;i<$(cancelUpdateReply).length;i++){
+      cancelUpdateReply[i].addEventListener('click', b);
+    }
+  </script>
+</html>

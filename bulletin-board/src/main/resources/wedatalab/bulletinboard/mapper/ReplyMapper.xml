@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wedatalab.bulletinboard.mapper.ReplyMapper">
+
+    <select id="getReply" parameterType="Long" resultType="wedatalab.bulletinboard.domain.Reply">
+        SELECT
+        RNO, CONTENT, WRITER, REGDATE
+        FROM TBL_REPLY
+        WHERE BOARDID = #{boardId}
+    </select>
+
+    <select id="getBoardId" parameterType="Long" resultType="wedatalab.bulletinboard.domain.Reply">
+        SELECT
+        BOARDID
+        FROM TBL_REPLY
+        WHERE BOARDID = #{boardId}
+    </select>
+
+    <insert id="uploadReply" parameterType="wedatalab.bulletinboard.domain.Reply">
+        INSERT INTO TBL_REPLY(BOARDID, RNO, CONTENT, WRITER)
+        VALUES(#{boardId}, tbl_reply_seq.nextval, #{content}, #{writer});
+    </insert>
+
+    <update id="updateReply" parameterType="wedatalab.bulletinboard.domain.Reply">
+        UPDATE TBL_REPLY
+        SET
+        WRITER=#{writer}, CONTENT=#{content}
+        WHERE RNO=#{rno} and BOARDID=#{boardId}
+    </update>
+
+    <delete id="deleteReply" parameterType="int">
+        DELETE FROM TBL_REPLY
+        WHERE RNO=#{rno}
+    </delete>
+
+    <insert id="uploadReplyReply" parameterType="wedatalab.bulletinboard.domain.Reply">
+        INSERT INTO TBL_REPLY(BOARDID, RNO, CONTENT, WRITER, PARENTID)
+        VALUES(#{boardId}, tbl_reply_seq.nextval, #{content}, #{writer}, #{parentId});
+    </insert>
+
+    <select id="getReplyReply" parameterType="Long" resultType="wedatalab.bulletinboard.domain.Reply">
+        SELECT
+        RNO, CONTENT, WRITER, REGDATE, PARENTID
+        FROM TBL_REPLY
+        WHERE BOARDID = #{boardId} and PARENTID IS NOT NULL
+    </select>
+
+    <update id="updateReplyReply" parameterType="wedatalab.bulletinboard.domain.Reply">
+        UPDATE TBL_REPLY
+        SET
+        WRITER=#{writer}, CONTENT=#{content}
+        WHERE RNO=#{rno}, and BOARDID=#{boardId}
+    </update>
+
+    <delete id="deleteReplyReply" parameterType="Long">
+        DELETE FROM TBL_REPLY
+        WHERE RNO=#{rno}
+    </delete>
+
+</mapper>
