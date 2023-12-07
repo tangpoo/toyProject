@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hello.core.beanfind.ApplicationContextSameBeanFindTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-07T11:52:59" hostname="DESKTOP-CN8NA2M" time="0.054">
+  <properties/>
+  <testcase name="특정 타입을 모두 조회하기" classname="hello.core.beanfind.ApplicationContextSameBeanFindTest" time="0.054"/>
+  <system-out><![CDATA[key = memberRepository1value = hello.core.member.MemoryMemberRepository@11389053
+key = memberRepository2value = hello.core.member.MemoryMemberRepository@5fe8b721
+beansOfType = {memberRepository1=hello.core.member.MemoryMemberRepository@11389053, memberRepository2=hello.core.member.MemoryMemberRepository@5fe8b721}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
