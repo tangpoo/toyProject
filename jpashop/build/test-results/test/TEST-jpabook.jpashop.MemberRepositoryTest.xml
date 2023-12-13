@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jpabook.jpashop.MemberRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-13T08:28:33" hostname="DESKTOP-CN8NA2M" time="0.522">
+  <properties/>
+  <testcase name="testMember()" classname="jpabook.jpashop.MemberRepositoryTest" time="0.522"/>
+  <system-out><![CDATA[17:28:30.337 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [jpabook.jpashop.MemberRepositoryTest]: MemberRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:28:30.431 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration jpabook.jpashop.JpashopApplication for test class jpabook.jpashop.MemberRepositoryTest
+17:28:30.570 [Test worker] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2023-12-13T17:28:30.811+09:00  INFO 79684 --- [    Test worker] jpabook.jpashop.MemberRepositoryTest     : Starting MemberRepositoryTest using Java 17.0.7 with PID 79684 (started by User in C:\study\jpashop)
+2023-12-13T17:28:30.812+09:00  INFO 79684 --- [    Test worker] jpabook.jpashop.MemberRepositoryTest     : No active profile set, falling back to 1 default profile: "default"
+2023-12-13T17:28:31.306+09:00  INFO 79684 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-13T17:28:31.324+09:00  INFO 79684 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 JPA repository interfaces.
+2023-12-13T17:28:31.715+09:00  INFO 79684 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-13T17:28:31.783+09:00  INFO 79684 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2023-12-13T17:28:31.818+09:00  INFO 79684 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-13T17:28:32.054+09:00  INFO 79684 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-13T17:28:32.082+09:00  INFO 79684 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-13T17:28:32.148+09:00  INFO 79684 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:tcp://localhost/~/jpashop user=SA
+2023-12-13T17:28:32.150+09:00  INFO 79684 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-13T17:28:32.353+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456112353 | took 5ms | statement | connection 1| url jdbc:h2:tcp://localhost/~/jpashop
+select * from INFORMATION_SCHEMA.SEQUENCES
+select * from INFORMATION_SCHEMA.SEQUENCES;
+2023-12-13T17:28:32.884+09:00  INFO 79684 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-13T17:28:32.900+09:00 DEBUG 79684 --- [    Test worker] org.hibernate.SQL                        : 
+    drop table if exists member cascade 
+2023-12-13T17:28:32.901+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456112901 | took 0ms | statement | connection 2| url jdbc:h2:tcp://localhost/~/jpashop
+
+    drop table if exists member cascade 
+
+    drop table if exists member cascade ;
+2023-12-13T17:28:32.902+09:00 DEBUG 79684 --- [    Test worker] org.hibernate.SQL                        : 
+    drop sequence if exists member_seq
+2023-12-13T17:28:32.902+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456112902 | took 0ms | statement | connection 2| url jdbc:h2:tcp://localhost/~/jpashop
+
+    drop sequence if exists member_seq
+
+    drop sequence if exists member_seq;
+2023-12-13T17:28:32.906+09:00 DEBUG 79684 --- [    Test worker] org.hibernate.SQL                        : 
+    create sequence member_seq start with 1 increment by 50
+2023-12-13T17:28:32.907+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456112907 | took 0ms | statement | connection 3| url jdbc:h2:tcp://localhost/~/jpashop
+
+    create sequence member_seq start with 1 increment by 50
+
+    create sequence member_seq start with 1 increment by 50;
+2023-12-13T17:28:32.909+09:00 DEBUG 79684 --- [    Test worker] org.hibernate.SQL                        : 
+    create table member (
+        id bigint not null,
+        username varchar(255),
+        primary key (id)
+    )
+2023-12-13T17:28:32.910+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456112910 | took 0ms | statement | connection 3| url jdbc:h2:tcp://localhost/~/jpashop
+
+    create table member (
+        id bigint not null,
+        username varchar(255),
+        primary key (id)
+    )
+
+    create table member (
+        id bigint not null,
+        username varchar(255),
+        primary key (id)
+    );
+2023-12-13T17:28:32.912+09:00  INFO 79684 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-13T17:28:33.044+09:00  WARN 79684 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-13T17:28:33.061+09:00  INFO 79684 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-12-13T17:28:33.377+09:00  INFO 79684 --- [    Test worker] jpabook.jpashop.MemberRepositoryTest     : Started MemberRepositoryTest in 2.817 seconds (process running for 3.841)
+2023-12-13T17:28:33.829+09:00 DEBUG 79684 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        next value for member_seq
+2023-12-13T17:28:33.831+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456113831 | took 0ms | statement | connection 4| url jdbc:h2:tcp://localhost/~/jpashop
+select next value for member_seq
+select next value for member_seq;
+findMember == member: true
+2023-12-13T17:28:33.905+09:00 DEBUG 79684 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (username, id) 
+    values
+        (?, ?)
+2023-12-13T17:28:33.907+09:00 TRACE 79684 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [memberA]
+2023-12-13T17:28:33.908+09:00 TRACE 79684 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2023-12-13T17:28:33.908+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456113908 | took 0ms | statement | connection 4| url jdbc:h2:tcp://localhost/~/jpashop
+insert into member (username,id) values (?,?)
+insert into member (username,id) values ('memberA',1);
+2023-12-13T17:28:33.910+09:00  INFO 79684 --- [    Test worker] p6spy                                    : #1702456113910 | took 0ms | commit | connection 4| url jdbc:h2:tcp://localhost/~/jpashop
+
+;
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
