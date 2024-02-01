@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j(topic = "UserDetailsServiceImpl")
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl extends AbstractUserDetailsAuthenticationProvider implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -29,13 +29,4 @@ public class UserDetailsServiceImpl extends AbstractUserDetailsAuthenticationPro
         return new UserDetailsImpl(user);
     }
 
-    @Override
-    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-
-    }
-
-    @Override
-    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        return this.loadUserByUsername(username);
-    }
 }
